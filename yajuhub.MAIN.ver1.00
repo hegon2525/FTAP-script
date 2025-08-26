@@ -1,0 +1,31 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+local Window = OrionLib:MakeWindow({
+    Name = "YajuHub Main",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "YajuHubConfig"
+})
+
+local Tab = Window:MakeTab({
+    Name = "Main",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+Tab:AddButton({
+    Name = "Print Hello",
+    Callback = function()
+        print("Hello from YajuHub!")
+    end
+})
+
+Tab:AddToggle({
+    Name = "AutoFarm",
+    Default = false,
+    Callback = function(Value)
+        print("AutoFarm set to:", Value)
+    end
+})
+
+OrionLib:Init()
