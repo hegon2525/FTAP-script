@@ -1,0 +1,47 @@
+-- OrionLib load
+local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
+
+-- GUI window
+local Window = OrionLib:MakeWindow({
+    Name = "YajuHub",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "YajuHubConfig"
+})
+
+-- Main tab
+local Tab = Window:MakeTab({
+    Name = "Main",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- Correct key
+local correctKey = "yajuhub"
+
+-- Next script URL
+local nextScriptUrl = "https://raw.githubusercontent.com/あなたのリポジトリ/next-script.lua"
+
+-- Key input
+Tab:AddTextbox({
+    Name = "",
+    Default = "",
+    TextDisappear = true,
+    Callback = function(Value)
+        if Value == correctKey then
+            local success, response = pcall(function()
+                return game:HttpGet(nextScriptUrl)
+            end)
+
+            if success then
+                local func = loadstring(response)
+                if func then
+                    func()
+                end
+            end
+        end
+    end
+})
+
+-- Init GUI
+OrionLib:Init()
