@@ -1,0 +1,80 @@
+local yajuhub = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
+local player = game.Players.LocalPlayer.Name
+local Window = OrionLib:MakeWindow({
+    Name = "Key とれよ",
+     HidePremium = false, 
+     SaveConfig = true,
+     ConfigFolder = "what",
+     })
+
+     OrionLib:MakeNotification({
+	Name = "Key system!",
+	Content = "Please correct the key "..player.."!",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+
+_G.Key = "yajuhub" -- you put key system here
+_G.KeyInput = "string"
+
+local Tab = Window:MakeTab({
+	Name = "Key とれよ",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "please correct key system!"
+})
+
+function myscript()
+local Window = OrionLib:MakeWindow({
+    Name = "Tutorial",
+     HidePremium = false, 
+     SaveConfig = true,
+     ConfigFolder = "what",
+     IntroText = "tutorial",
+     IntroIcon = "rbxassetid://136091781462514",
+     })
+end
+
+function makewhat()
+print("omg vaild key!!")
+OrionLib:MakeNotification({
+	Name = "Correct Key!",
+	Content = "You have been correct key "..player.."!",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+end
+
+function makewhat2()
+warn("nah invaild key!!")
+OrionLib:MakeNotification({
+	Name = "incorrect Key!",
+	Content = "You have been incorrect key "..player.."!",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+end
+
+Tab:AddTextbox({
+	Name = "Key System",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+		_G.KeyInput = Value
+	end	  
+})
+
+Tab:AddButton({
+	Name = "Enter Key",
+	Callback = function()
+      		if _G.KeyInput == _G.Key then
+                  myscript()
+                  makewhat()
+                  else
+                  makewhat2()
+              end
+end
+})
