@@ -1,0 +1,67 @@
+-- OrionLib load
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+-- Create GUI window
+local Window = OrionLib:MakeWindow({
+    Name = "YajuHub Main",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "YajuHubConfig"
+})
+
+-- Main tab
+local Tab = Window:MakeTab({
+    Name = "Main",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- Correct key
+local correctKey = "yajuhub"
+
+-- Textbox for key input
+Tab:AddTextbox({
+    Name = "Enter Key",
+    Default = "",
+    TextDisappear = true,
+    Callback = function(Value)
+        local userKey = Value
+        if userKey == correctKey then
+            OrionLib:MakeNotification({
+                Name = "Key Matched",
+                Content = "Key is correct! Loading next script...",
+                Image = "rbxassetid://4483345998",
+                Time = 5
+            })
+
+            -- URL of next script
+            local nextScriptUrl = "https://raw.githubusercontent.com/your-repo/next-script.lua"
+
+            -- Load and execute next script
+            local success, response = pcall(function()
+                return game:HttpGet(nextScriptUrl)
+            end)
+
+            if success then
+                local func = loadstring(response)
+                if func then
+                    func()
+                else
+                    warn("Failed to load next script: loadstring error")
+                end
+            else
+                warn("Failed to load next script: HttpGet error")
+            end
+        else
+            OrionLib:MakeNotification({
+                Name = "Incorrect Key",
+                Content = "The key you entered is incorrect.",
+                Image = "rbxassetid://4483345998",
+                Time = 5
+            })
+        end
+    end
+})
+
+-- Initialize GUI
+OrionLib:Init()
